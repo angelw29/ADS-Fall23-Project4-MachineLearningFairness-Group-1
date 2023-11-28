@@ -14573,28 +14573,33 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Import-necessary-packages">Import necessary packages<a class="anchor-link" href="#Import-necessary-packages">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optim</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">calibration</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optim</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 </pre></div>
 
      </div>
@@ -14609,7 +14614,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Data-cleaning">Data cleaning<a class="anchor-link" href="#Data-cleaning">&#182;</a></h4>
+<h3 id="Data-cleaning">Data cleaning<a class="anchor-link" href="#Data-cleaning">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14618,12 +14623,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#load data</span>
-<span class="n">df_raw</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv'</span><span class="p">)</span>
-<span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'https://github.com/propublica/compas-analysis/raw/master/compas-scores-two-years.csv'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
 
      </div>
@@ -14641,7 +14646,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
 
 
@@ -14675,12 +14680,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#calculate days in jail for each individual</span>
-<span class="n">df_raw</span><span class="p">[</span><span class="s1">'day_stayed'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_raw</span><span class="p">[</span><span class="s2">"c_jail_out"</span><span class="p">])</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_raw</span><span class="p">[</span><span class="s2">"c_jail_in"</span><span class="p">]))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'timedelta64[h]'</span><span class="p">)</span> <span class="o">/</span> <span class="mi">24</span>
-<span class="n">df_raw</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">df_raw</span><span class="o">.</span><span class="n">day_stayed</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate days in jail for each individual</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'day_stayed'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"c_jail_out"</span><span class="p">])</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"c_jail_in"</span><span class="p">]))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'timedelta64[h]'</span><span class="p">)</span> <span class="o">/</span> <span class="mi">24</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">day_stayed</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14693,17 +14698,16 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#initial selection of the variable to include</span>
-<span class="c1">#drop those unnecessary variables, eg id, name, first, etc</span>
-<span class="c1">#drop those that have repeated infor, eg dob (relation to age,age_cat)</span>
-<span class="n">df_ini</span><span class="o">=</span><span class="n">df_raw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">,</span><span class="s1">'age'</span><span class="p">,</span><span class="s1">'age_cat'</span><span class="p">,</span>  <span class="s1">'race'</span><span class="p">,</span> <span class="s1">'decile_score'</span><span class="p">,</span><span class="s1">'score_text'</span><span class="p">,</span> <span class="s1">'priors_count'</span><span class="p">,</span><span class="s1">'days_b_screening_arrest'</span><span class="p">,</span>
-                    <span class="s1">'v_decile_score'</span><span class="p">,</span> <span class="s1">'v_score_text'</span><span class="p">,</span><span class="s1">'c_charge_degree'</span><span class="p">,</span> <span class="s1">'is_violent_recid'</span><span class="p">,</span> <span class="s1">'is_recid'</span><span class="p">,</span> <span class="s1">'day_stayed'</span><span class="p">,</span> <span class="s1">'two_year_recid'</span><span class="p">])</span>
-<span class="c1">#</span>
-
-<span class="n">df_ini</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Variable selection </span>
+<span class="c1"># Drop unnecessary variables (eg.: id, name, first, etc.)</span>
+<span class="c1"># Drop variables that have repeated info (eg.: dob to general and related to age, age_cat)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'sex'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">,</span> <span class="s1">'age_cat'</span><span class="p">,</span> <span class="s1">'race'</span><span class="p">,</span> <span class="s1">'decile_score'</span><span class="p">,</span> <span class="s1">'score_text'</span><span class="p">,</span> <span class="s1">'priors_count'</span><span class="p">,</span>
+             <span class="s1">'days_b_screening_arrest'</span><span class="p">,</span> <span class="s1">'v_decile_score'</span><span class="p">,</span> <span class="s1">'v_score_text'</span><span class="p">,</span><span class="s1">'c_charge_degree'</span><span class="p">,</span> 
+             <span class="s1">'is_violent_recid'</span><span class="p">,</span> <span class="s1">'is_recid'</span><span class="p">,</span> <span class="s1">'day_stayed'</span><span class="p">,</span> <span class="s1">'two_year_recid'</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14721,7 +14725,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
@@ -14868,15 +14872,14 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#df_ini.race.value_counts() --&gt; not all are AA or Caucasian</span>
-<span class="c1">#drop those that are not</span>
-<span class="n">is_race</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">==</span><span class="s1">'African-American'</span> <span class="ow">or</span> <span class="n">i</span><span class="o">==</span><span class="s1">'Caucasian'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df_ini</span><span class="o">.</span><span class="n">race</span><span class="p">]</span>
-<span class="n">df_ini</span> <span class="o">=</span> <span class="n">df_ini</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">is_race</span><span class="p">]</span>
-<span class="n">df_ini</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-<span class="c1">#df_ini.head(5)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># df.race.value_counts() --&gt; not all are AA or Caucasian</span>
+<span class="c1"># drop those that are not</span>
+<span class="n">is_race</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">==</span><span class="s1">'African-American'</span> <span class="ow">or</span> <span class="n">i</span><span class="o">==</span><span class="s1">'Caucasian'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">race</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">is_race</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">race</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14894,7 +14897,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
 
@@ -14916,16 +14919,16 @@ Name: race, dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_ini</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Male'</span><span class="p">,</span><span class="s1">'Female'</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">df_ini</span><span class="p">[</span><span class="s1">'race'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Caucasian'</span><span class="p">,</span><span class="s1">'African-American'</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">df_ini</span><span class="p">[</span><span class="s1">'score_text'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Low'</span><span class="p">,</span><span class="s1">'Medium'</span><span class="p">,</span><span class="s1">'High'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">df_ini</span><span class="p">[</span><span class="s1">'v_score_text'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Low'</span><span class="p">,</span><span class="s1">'Medium'</span><span class="p">,</span><span class="s1">'High'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">df_ini</span><span class="p">[</span><span class="s1">'age_cat'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Less than 25'</span><span class="p">,</span><span class="s1">'25 - 45'</span><span class="p">,</span><span class="s1">'Greater than 45'</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> 
-<span class="n">df_ini</span><span class="p">[</span><span class="s1">'c_charge_degree'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'M'</span><span class="p">,</span><span class="s1">'F'</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">df_ini</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Male'</span><span class="p">,</span><span class="s1">'Female'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'race'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Caucasian'</span><span class="p">,</span><span class="s1">'African-American'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'score_text'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Low'</span><span class="p">,</span><span class="s1">'Medium'</span><span class="p">,</span><span class="s1">'High'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'v_score_text'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Low'</span><span class="p">,</span><span class="s1">'Medium'</span><span class="p">,</span><span class="s1">'High'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'age_cat'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'Less than 25'</span><span class="p">,</span><span class="s1">'25 - 45'</span><span class="p">,</span><span class="s1">'Greater than 45'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">'c_charge_degree'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">'M'</span><span class="p">,</span><span class="s1">'F'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14943,7 +14946,7 @@ Name: race, dtype: int64</pre>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
@@ -15090,24 +15093,21 @@ Name: race, dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Assuming you have a DataFrame 'df' with your data</span>
-<span class="c1"># df = pd.read_csv('your_data.csv')</span>
-
-<span class="c1"># Get the list of column names</span>
-<span class="n">column_names</span> <span class="o">=</span> <span class="n">df_ini</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the list of column names</span>
+<span class="n">column_names</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
 <span class="c1"># Assuming 'target_variable' is the name of your target variable</span>
 <span class="n">target_variable</span> <span class="o">=</span> <span class="s1">'two_year_recid'</span>
 
 <span class="c1"># Select relevant features for correlation analysis</span>
-<span class="n">features_for_correlation</span> <span class="o">=</span> <span class="n">column_names</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Copy the list of column names</span>
+<span class="n">features_for_correlation</span> <span class="o">=</span> <span class="n">column_names</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># Copy the list of column names</span>
 <span class="n">features_for_correlation</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">target_variable</span><span class="p">)</span>
 
 <span class="c1"># Calculate the correlation matrix</span>
-<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">df_ini</span><span class="p">[</span><span class="n">features_for_correlation</span> <span class="o">+</span> <span class="p">[</span><span class="n">target_variable</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">features_for_correlation</span> <span class="o">+</span> <span class="p">[</span><span class="n">target_variable</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 
 <span class="c1"># Extract correlations with the target variable</span>
 <span class="n">correlations_with_target</span> <span class="o">=</span> <span class="n">correlation_matrix</span><span class="p">[</span><span class="n">target_variable</span><span class="p">]</span>
@@ -15117,7 +15117,6 @@ Name: race, dtype: int64</pre>
 <span class="nb">print</span><span class="p">(</span><span class="n">correlations_with_target</span><span class="p">)</span>
 
 <span class="c1"># You can also visualize the entire correlation matrix using a heatmap</span>
-
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'coolwarm'</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">".2f"</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Correlation Matrix"</span><span class="p">)</span>
@@ -15190,11 +15189,11 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Example: Remove one of the highly correlated features</span>
-<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># Set your correlation threshold</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="c1"># Set your correlation threshold</span>
 
 <span class="c1"># Find pairs of highly correlated features</span>
 <span class="n">highly_correlated_pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
@@ -15214,7 +15213,7 @@ class="
         <span class="n">features_to_remove</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">feature_i</span><span class="p">)</span>
 
 <span class="c1"># Drop the identified features</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df_ini</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">features_to_remove</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">features_to_remove</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
@@ -15233,7 +15232,7 @@ class="
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -15348,21 +15347,21 @@ $$d(x_n, v_k, α) = \sum\limits _{i=1}^{D} α_i(x_{ni} - v_{ki})^2$$</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
-<span class="nd">@jit</span>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">P</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>    
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
                 <span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">-</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">-</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="p">])</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">dists</span>
 </pre></div>
@@ -15370,30 +15369,6 @@ $$d(x_n, v_k, α) = \sum\limits _{i=1}^{D} α_i(x_{ni} - v_{ki})^2$$</p>
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/var/folders/_y/30qs0jz17rz4wnknc7dm4rcr0000gn/T/ipykernel_63637/3660324205.py:2: NumbaDeprecationWarning: <span class="ansi-bold">The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.</span>
-  @jit
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -15414,15 +15389,15 @@ $$P(Z=k|x)=exp(-d(x,v_k))/\sum\limits_{j=1}^{k}exp(-d(x,v_j))$$</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@jit</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">M_nk</span><span class="p">(</span><span class="n">dists</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="n">M_nk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
     <span class="n">exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
@@ -15444,30 +15419,6 @@ $$P(Z=k|x)=exp(-d(x,v_k))/\sum\limits_{j=1}^{k}exp(-d(x,v_j))$$</p>
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/var/folders/_y/30qs0jz17rz4wnknc7dm4rcr0000gn/T/ipykernel_63637/2771268032.py:1: NumbaDeprecationWarning: <span class="ansi-bold">The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.</span>
-  @jit
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15483,15 +15434,15 @@ $M^-_k$ is defined similarly.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@jit</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">M_k</span><span class="p">(</span><span class="n">M_nk</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="n">M_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
@@ -15506,30 +15457,6 @@ $M^-_k$ is defined similarly.</p>
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/var/folders/_y/30qs0jz17rz4wnknc7dm4rcr0000gn/T/ipykernel_63637/442650194.py:1: NumbaDeprecationWarning: <span class="ansi-bold">The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.</span>
-  @jit
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15542,8 +15469,44 @@ $$L_z = \sum_{k=1}^K |M_k^+ - M_k^-| $$
 Second term quantify the amount of information lost in the new representation using a simple squared-error measure:
 $$L_x = \sum_{n=1}^N (x_n - \hat{x}_n)^2$$
 where $ \hat{x}_n $ are the reconstructions of $x_n$ from $Z$:
-$$\hat{x}_n = \sum^K_{k=1}M_{nk}v_k$$
-These first two terms encourage the system to encode all information in the input attributes except for those that can lead to biased decisions.
+$$\hat{x}_n = \sum^K_{k=1}M_{nk}v_k$$</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">x_n_hat</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">M_nk</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">x_n_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">P</span><span class="p">))</span>
+    <span class="n">L_x</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+                <span class="n">x_n_hat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="n">M_nk</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span>
+            <span class="n">L_x</span> <span class="o">+=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_n_hat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_n_hat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">x_n_hat</span><span class="p">,</span> <span class="n">L_x</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The first two terms encourage the system to encode all information in the input attributes except for those that can lead to biased decisions.
 Third term requires the prediction of $y$ is as accurate as possible:
 $$L_y = \sum_{n=1}^N -y_n log \hat{y}_n - (1-y_n)log(1- \hat{y}_n) $$
 Here $\hat{y}_n$ is the prediction for $y_n$,  based on marginalizing over each prototype’s prediction for $Y$, weighted by their respective probabilities $P(Z = k|x_n)$:
@@ -15553,6 +15516,32 @@ $$\hat{y_n}=\sum\limits_{k = 1}^{K}M_{n,k}w_k$$
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">yhat</span><span class="p">(</span><span class="n">M_nk</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">L_y</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">M_nk</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-6</span> <span class="k">if</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.999</span> <span class="k">if</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">L_y</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">L_y</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15566,37 +15555,16 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@jit</span>
-<span class="k">def</span> <span class="nf">x_n_hat</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">M_nk</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="n">x_n_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">P</span><span class="p">))</span>
-    <span class="n">L_x</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-                <span class="n">x_n_hat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="n">M_nk</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span>
-            <span class="n">L_x</span> <span class="o">+=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_n_hat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_n_hat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">x_n_hat</span><span class="p">,</span> <span class="n">L_x</span>
-
-<span class="k">def</span> <span class="nf">yhat</span><span class="p">(</span><span class="n">M_nk</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="n">yhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-    <span class="n">L_y</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-            <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">M_nk</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-        <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-6</span> <span class="k">if</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.999</span> <span class="k">if</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">L_y</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">L_y</span>
-
-<span class="k">def</span> <span class="nf">LFR</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data_sensitive</span><span class="p">,</span> <span class="n">data_nonsensitive</span><span class="p">,</span> <span class="n">y_sensitive</span><span class="p">,</span> <span class="n">y_nonsensitive</span><span class="p">,</span>  <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">A_x</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="n">A_y</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">A_z</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">LFR</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">data_sensitive</span><span class="p">,</span> <span class="n">data_nonsensitive</span><span class="p">,</span> <span class="n">y_sensitive</span><span class="p">,</span> <span class="n">y_nonsensitive</span><span class="p">,</span> 
+        <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">A_x</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="n">A_y</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">A_z</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     
     <span class="n">LFR</span><span class="o">.</span><span class="n">iters</span> <span class="o">+=</span> <span class="mi">1</span> 
     <span class="n">Ns</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">data_sensitive</span><span class="o">.</span><span class="n">shape</span>
@@ -15631,14 +15599,13 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
     <span class="n">loss</span> <span class="o">=</span> <span class="n">A_x</span> <span class="o">*</span> <span class="n">L_x</span> <span class="o">+</span> <span class="n">A_y</span> <span class="o">*</span> <span class="n">L_y</span> <span class="o">+</span> <span class="n">A_z</span> <span class="o">*</span> <span class="n">L_z</span>
 
     <span class="k">if</span> <span class="n">LFR</span><span class="o">.</span><span class="n">iters</span> <span class="o">%</span> <span class="mi">500</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"step: </span><span class="si">{}</span><span class="s2">, loss: </span><span class="si">{}</span><span class="s2">, L_x: </span><span class="si">{}</span><span class="s2">,  L_y: </span><span class="si">{}</span><span class="s2">,  L_z: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">LFR</span><span class="o">.</span><span class="n">iters</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">L_x</span><span class="p">,</span>  <span class="n">L_y</span><span class="p">,</span>  <span class="n">L_z</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"step: </span><span class="si">{}</span><span class="s2">, loss: </span><span class="si">{}</span><span class="s2">, L_x: </span><span class="si">{}</span><span class="s2">, L_y: </span><span class="si">{}</span><span class="s2">, L_z: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">LFR</span><span class="o">.</span><span class="n">iters</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">L_x</span><span class="p">,</span> <span class="n">L_y</span><span class="p">,</span> <span class="n">L_z</span><span class="p">))</span>
       
     <span class="k">if</span> <span class="n">results</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">yhat_sensitive</span><span class="p">,</span> <span class="n">yhat_nonsensitive</span><span class="p">,</span> <span class="n">M_nk_sensitive</span><span class="p">,</span> <span class="n">M_nk_nonsensitive</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">loss</span>
-<span class="n">LFR</span><span class="o">.</span><span class="n">iters</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 
      </div>
@@ -15646,39 +15613,17 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/var/folders/_y/30qs0jz17rz4wnknc7dm4rcr0000gn/T/ipykernel_63637/1793627912.py:1: NumbaDeprecationWarning: <span class="ansi-bold">The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.</span>
-  @jit
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># k = number of propotypes</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">LFR</span><span class="o">.</span><span class="n">iters</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># k = number of propotypes</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -15686,7 +15631,6 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
 <span class="n">sensitive</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="c1">#data = data[:, :387]</span>
 <span class="n">sensitive_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sensitive</span><span class="o">==</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">nonsensitive_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sensitive</span><span class="o">!=</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">data_sensitive</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sensitive_idx</span><span class="p">,:]</span>
@@ -15705,18 +15649,25 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#train, val, test for nonsensitive and sensitive data</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Train, val, test for nonsensitive and sensitive data</span>
 <span class="n">train_ratio</span> <span class="o">=</span> <span class="mf">0.7</span>
 <span class="n">val_ratio</span> <span class="o">=</span> <span class="mf">0.15</span>
 <span class="n">test_ratio</span> <span class="o">=</span> <span class="mf">0.15</span>
-<span class="n">sensitive_train_val</span><span class="p">,</span> <span class="n">sensitive_test</span><span class="p">,</span> <span class="n">sensitive_ytrain_val</span><span class="p">,</span> <span class="n">sensitive_ytest</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data_sensitive</span><span class="p">,</span> <span class="n">y_sensitive</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_ratio</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
-<span class="n">sensitive_train</span><span class="p">,</span> <span class="n">sensitive_val</span><span class="p">,</span> <span class="n">sensitive_ytrain</span><span class="p">,</span>  <span class="n">sensitive_yval</span><span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">sensitive_train_val</span><span class="p">,</span><span class="n">sensitive_ytrain_val</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">val_ratio</span><span class="o">/</span><span class="p">(</span><span class="n">train_ratio</span><span class="o">+</span><span class="n">val_ratio</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
-<span class="n">nonsensitive_train_val</span><span class="p">,</span> <span class="n">nonsensitive_test</span><span class="p">,</span> <span class="n">nonsensitive_ytrain_val</span><span class="p">,</span> <span class="n">nonsensitive_ytest</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data_sensitive</span><span class="p">,</span> <span class="n">y_sensitive</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_ratio</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
-<span class="n">nonsensitive_train</span><span class="p">,</span> <span class="n">nonsensitive_val</span><span class="p">,</span> <span class="n">nonsensitive_ytrain</span><span class="p">,</span>  <span class="n">nonsensitive_yval</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">nonsensitive_train_val</span><span class="p">,</span> <span class="n">nonsensitive_ytrain_val</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">val_ratio</span><span class="o">/</span><span class="p">(</span><span class="n">train_ratio</span><span class="o">+</span><span class="n">val_ratio</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">sensitive_train_val</span><span class="p">,</span> <span class="n">sensitive_test</span><span class="p">,</span> <span class="n">sensitive_ytrain_val</span><span class="p">,</span> <span class="n">sensitive_ytest</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">data_sensitive</span><span class="p">,</span> <span class="n">y_sensitive</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_ratio</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">sensitive_train</span><span class="p">,</span> <span class="n">sensitive_val</span><span class="p">,</span> <span class="n">sensitive_ytrain</span><span class="p">,</span> <span class="n">sensitive_yval</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">sensitive_train_val</span><span class="p">,</span><span class="n">sensitive_ytrain_val</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">val_ratio</span><span class="o">/</span><span class="p">(</span><span class="n">train_ratio</span><span class="o">+</span><span class="n">val_ratio</span><span class="p">),</span> 
+                     <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">nonsensitive_train_val</span><span class="p">,</span> <span class="n">nonsensitive_test</span><span class="p">,</span> <span class="n">nonsensitive_ytrain_val</span><span class="p">,</span> <span class="n">nonsensitive_ytest</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">data_sensitive</span><span class="p">,</span> <span class="n">y_sensitive</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_ratio</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nonsensitive_train</span><span class="p">,</span> <span class="n">nonsensitive_val</span><span class="p">,</span> <span class="n">nonsensitive_ytrain</span><span class="p">,</span> <span class="n">nonsensitive_yval</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">nonsensitive_train_val</span><span class="p">,</span> <span class="n">nonsensitive_ytrain_val</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">val_ratio</span><span class="o">/</span><span class="p">(</span><span class="n">train_ratio</span><span class="o">+</span><span class="n">val_ratio</span><span class="p">),</span> 
+                     <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sensitive_test</span><span class="p">,</span> <span class="n">nonsensitive_test</span><span class="p">))</span>
 <span class="n">ytest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sensitive_ytest</span><span class="p">,</span> <span class="n">nonsensitive_ytest</span><span class="p">))</span>
@@ -15735,17 +15686,21 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rez</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">k</span><span class="p">)</span>
-<span class="n">yhat_sensitive</span><span class="p">,</span> <span class="n">yhat_nonsensitive</span><span class="p">,</span> <span class="n">M_nk_sensitive</span><span class="p">,</span> <span class="n">M_nk_nonsensitive</span> <span class="o">=</span> <span class="n">LFR</span><span class="p">(</span><span class="n">rez</span><span class="p">,</span>
-                                                                           <span class="n">sensitive_train</span><span class="p">,</span>
-                                                                           <span class="n">nonsensitive_train</span><span class="p">,</span>
-                                                                           <span class="n">sensitive_ytrain</span><span class="p">,</span>
-                                                                           <span class="n">nonsensitive_ytrain</span><span class="p">,</span>
-                                                                           <span class="n">k</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>
-                                                                           <span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">yhat_sensitive</span><span class="p">,</span> <span class="n">yhat_nonsensitive</span><span class="p">,</span> <span class="n">M_nk_sensitive</span><span class="p">,</span> <span class="n">M_nk_nonsensitive</span> <span class="o">=</span> <span class="n">LFR</span><span class="p">(</span><span class="n">rez</span><span class="p">,</span> <span class="n">sensitive_train</span><span class="p">,</span> 
+                                                                           <span class="n">nonsensitive_train</span><span class="p">,</span> <span class="n">sensitive_ytrain</span><span class="p">,</span>
+                                                                           <span class="n">nonsensitive_ytrain</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> 
+                                                                           <span class="mi">1000</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">val_yhat_sensitive</span><span class="p">,</span> <span class="n">val_yhat_nonsensitive</span><span class="p">,</span> <span class="n">val_M_nk_sensitive</span><span class="p">,</span> <span class="n">val_M_nk_nonsensitive</span> <span class="o">=</span> <span class="n">LFR</span><span class="p">(</span><span class="n">rez</span><span class="p">,</span> <span class="n">sensitive_val</span><span class="p">,</span> 
+                                                                                           <span class="n">nonsensitive_val</span><span class="p">,</span>
+                                                                                           <span class="n">sensitive_yval</span><span class="p">,</span>
+                                                                                           <span class="n">nonsensitive_yval</span><span class="p">,</span>
+                                                                                           <span class="n">k</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>
+                                                                                           <span class="n">results</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15758,7 +15713,7 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bnd</span> <span class="o">=</span> <span class="p">[]</span>
@@ -15767,16 +15722,10 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
         <span class="n">bnd</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">bnd</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-<span class="n">rez</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">fmin_l_bfgs_b</span><span class="p">(</span><span class="n">LFR</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">rez</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
-                          <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">sensitive_train</span><span class="p">,</span>
-                                <span class="n">nonsensitive_train</span><span class="p">,</span>
-                                <span class="n">sensitive_ytrain</span><span class="p">,</span>
-                                <span class="n">nonsensitive_ytrain</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span>
-                                <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-                          <span class="n">bounds</span> <span class="o">=</span> <span class="n">bnd</span><span class="p">,</span> <span class="n">approx_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">maxfun</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
-                          <span class="n">maxiter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">iprint</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">end</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+<span class="n">rez</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">fmin_l_bfgs_b</span><span class="p">(</span><span class="n">LFR</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">rez</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">sensitive_train</span><span class="p">,</span> <span class="n">nonsensitive_train</span><span class="p">,</span> <span class="n">sensitive_ytrain</span><span class="p">,</span> 
+                                                           <span class="n">nonsensitive_ytrain</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> 
+                          <span class="n">bounds</span><span class="o">=</span><span class="n">bnd</span><span class="p">,</span> <span class="n">approx_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">maxfun</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">iprint</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15798,57 +15747,23 @@ $$L = A_z \cdot L_z + A_x \cdot L_x + A_y \cdot L_y $$</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>step: 500, loss: 277.09080386239174, L_x: 24482.874934017,  L_y: 2047.0282548253163,  L_z: 0.0699396908864584
-step: 1000, loss: 218.43474039577853, L_x: 24616.221737998465,  L_y: 2057.4484631601404,  L_z: 0.010228271905964648
-step: 1500, loss: 210.52887786955716, L_x: 24633.587584366065,  L_y: 2053.011384334164,  L_z: 0.002764380677704098
-step: 2000, loss: 209.84888009111097, L_x: 24630.46164182262,  L_y: 2052.3582650839535,  L_z: 0.00215000741853337
-step: 2500, loss: 208.56352905844264, L_x: 24629.345769047435,  L_y: 2052.941533045986,  L_z: 0.0008064411769392599
-step: 3000, loss: 207.89964105430207, L_x: 24630.621881709463,  L_y: 2052.913720172448,  L_z: 0.00014520684888633117
-step: 3500, loss: 207.89339113006662, L_x: 24630.47176982252,  L_y: 2052.9301333530098,  L_z: 0.00013733061778337108
-step: 4000, loss: 207.76211857121112, L_x: 24630.373372779257,  L_y: 2052.894069099485,  L_z: 9.674323984659727e-06
-step: 4500, loss: 207.8308453423278, L_x: 24630.4734767612,  L_y: 2052.8647883877434,  L_z: 8.131915587734906e-05
-step: 5000, loss: 207.7567202304761, L_x: 24630.39005423721,  L_y: 2052.89128591961,  L_z: 4.552633091389757e-06
-step: 5500, loss: 207.7569934906892, L_x: 24630.39279673656,  L_y: 2052.8909159940376,  L_z: 4.862611611783363e-06
-step: 6000, loss: 207.75689587428974, L_x: 24630.387807705487,  L_y: 2052.8904208630147,  L_z: 4.815007217703893e-06
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"training time: </span><span class="si">{}</span><span class="s2">s"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>training time: 76.0358350276947s
+<pre>step: 500, loss: 254.01051834383375, L_x: 22924.844738353488, L_y: 2186.4428801655877, L_z: 0.033073745853439626
+step: 1000, loss: 226.25018911225425, L_x: 22898.981324373402, L_y: 2171.0301041727444, L_z: 0.006857280562542464
+step: 1500, loss: 221.5355118956927, L_x: 22896.26494564498, L_y: 2175.0948656271885, L_z: 0.0017363988384093698
+step: 2000, loss: 220.9820849653675, L_x: 22896.013839578023, L_y: 2174.33032147217, L_z: 0.0012594514341927043
+step: 2500, loss: 219.70389662602153, L_x: 22893.07331397262, L_y: 2171.1782866073822, L_z: 0.000296760633886034
+step: 3000, loss: 219.43815995322873, L_x: 22892.39463698135, L_y: 2169.979860866363, L_z: 0.00015093440289429272
+step: 3500, loss: 219.3689544970715, L_x: 22892.639058735098, L_y: 2170.1079678509113, L_z: 6.889380610686224e-05
+step: 4000, loss: 219.31592863508695, L_x: 22892.62734152585, L_y: 2170.074568968924, L_z: 1.9209004041995104e-05
+step: 4500, loss: 219.29220544632744, L_x: 22892.58943151207, L_y: 2169.931216411209, L_z: 9.824862055363148e-06
+step: 5000, loss: 211.725641460611, L_x: 22770.114300141482, L_y: 2076.3352598112947, L_z: 0.0018151040494673726
+step: 5500, loss: 209.6339064177153, L_x: 22689.911908636714, L_y: 2068.5892772319557, L_z: 0.0005059875036560468
+step: 6000, loss: 209.26296117789082, L_x: 22695.926507864722, L_y: 2068.6638520536417, L_z: 0.00012698332174015947
+step: 6500, loss: 209.1992439795231, L_x: 22694.73758198429, L_y: 2068.6100305342775, L_z: 6.876716789690207e-05
+step: 7000, loss: 209.18552120571178, L_x: 22687.948072950305, L_y: 2068.7022905784343, L_z: 4.6497340573325996e-05
+step: 7500, loss: 209.1378580182784, L_x: 22690.600388848914, L_y: 2068.635112783589, L_z: 5.286701034556973e-06
+step: 8000, loss: 209.13735499133875, L_x: 22690.603160815328, L_y: 2068.6353294879045, L_z: 4.761726466781524e-06
+step: 8500, loss: 209.13753199311984, L_x: 22690.601896582244, L_y: 2068.635919028045, L_z: 4.879900657103753e-06
 </pre>
 </div>
 </div>
@@ -15862,7 +15777,7 @@ step: 6000, loss: 207.75689587428974, L_x: 24630.387807705487,  L_y: 2052.890420
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">rez</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">:</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">k</span><span class="p">]</span>
@@ -15879,38 +15794,16 @@ step: 6000, loss: 207.75689587428974, L_x: 24630.387807705487,  L_y: 2052.890420
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">val_yhat_sensitive</span><span class="p">,</span><span class="n">val_yhat_nonsensitive</span><span class="p">,</span> <span class="n">val_M_nk_sensitive</span><span class="p">,</span> <span class="n">val_M_nk_nonsensitive</span> <span class="o">=</span> <span class="n">LFR</span><span class="p">(</span><span class="n">rez</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                                                           <span class="n">sensitive_val</span><span class="p">,</span>
-                                                                           <span class="n">nonsensitive_val</span><span class="p">,</span>
-                                                                           <span class="n">sensitive_yval</span><span class="p">,</span>
-                                                                           <span class="n">nonsensitive_yval</span><span class="p">,</span>
-                                                                           <span class="n">k</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>
-                                                                            <span class="n">results</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_yhat_sensitive</span><span class="p">,</span> <span class="n">test_yhat_nonsensitive</span><span class="p">,</span> <span class="n">test_M_nk_sensitive</span><span class="p">,</span> <span class="n">test_M_nk_nonsensitive</span> <span class="o">=</span> <span class="n">LFR</span><span class="p">(</span><span class="n">rez</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                                                           <span class="n">sensitive_test</span><span class="p">,</span>
-                                                                           <span class="n">nonsensitive_test</span><span class="p">,</span>
-                                                                           <span class="n">sensitive_ytest</span><span class="p">,</span>
-                                                                           <span class="n">nonsensitive_ytest</span><span class="p">,</span>
-                                                                           <span class="n">k</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>
-                                                                            <span class="n">results</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+                                                                                               <span class="n">sensitive_test</span><span class="p">,</span>
+                                                                                               <span class="n">nonsensitive_test</span><span class="p">,</span>
+                                                                                               <span class="n">sensitive_ytest</span><span class="p">,</span>
+                                                                                               <span class="n">nonsensitive_ytest</span><span class="p">,</span>
+                                                                                               <span class="n">k</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>
+                                                                                               <span class="n">results</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15923,105 +15816,17 @@ step: 6000, loss: 207.75689587428974, L_x: 24630.387807705487,  L_y: 2052.890420
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">val_yhat_sensitive</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span><span class="mf">.5</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">val_yhat_sensitive</span><span class="p">]</span>
-<span class="n">val_yhat_nonsensitive</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span><span class="mf">.5</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">val_yhat_nonsensitive</span><span class="p">]</span>
-
-<span class="n">val_sensitive_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sensitive_yval</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">val_yhat_sensitive</span><span class="p">))</span>
-<span class="n">val_nonsensitive_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nonsensitive_yval</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">val_yhat_nonsensitive</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the test accuracy for for sensitive group is: </span><span class="si">{</span><span class="n">val_sensitive_accuracy</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the test accuracy for for nonsensitive group is: </span><span class="si">{</span><span class="n">val_nonsensitive_accuracy</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>the test accuracy for for sensitive group is: 0.5539358600583091
-the test accuracy for for nonsensitive group is: 0.565597667638484
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">val_target</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sensitive_yval</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">nonsensitive_yval</span><span class="p">)</span>
-<span class="n">val_pred</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">val_yhat_sensitive</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">val_yhat_nonsensitive</span><span class="p">)</span>
-<span class="n">val_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span><span class="mf">.5</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">val_pred</span><span class="p">]</span>
-<span class="n">val_total_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">val_target</span><span class="p">,</span><span class="n">val_pred</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the test accuracy for overall is: </span><span class="si">{</span><span class="n">val_total_accuracy</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>the test accuracy for overall is: 0.5597667638483965
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_yhat_sensitive</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span><span class="mf">.5</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">test_yhat_sensitive</span><span class="p">]</span>
 <span class="n">test_yhat_nonsensitive</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span><span class="mf">.5</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">test_yhat_nonsensitive</span><span class="p">]</span>
 
-<span class="n">test_sensitive_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sensitive_ytest</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">test_yhat_sensitive</span><span class="p">))</span>
-<span class="n">test_nonsensitive_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nonsensitive_ytest</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">test_yhat_nonsensitive</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the test accuracy for for sensitive group is: </span><span class="si">{</span><span class="n">test_sensitive_accuracy</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the test accuracy for for nonsensitive group is: </span><span class="si">{</span><span class="n">test_nonsensitive_accuracy</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="n">sensitive_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sensitive_ytest</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">test_yhat_sensitive</span><span class="p">))</span>
+<span class="n">nonsensitive_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nonsensitive_ytest</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">test_yhat_nonsensitive</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the test accuracy for for sensitive group is: </span><span class="si">{</span><span class="n">sensitive_accuracy</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the test accuracy for for nonsensitive group is: </span><span class="si">{</span><span class="n">nonsensitive_accuracy</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16043,348 +15848,10 @@ the test accuracy for for nonsensitive group is: 0.565597667638484
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>the test accuracy for for sensitive group is: 0.5830903790087464
-the test accuracy for for nonsensitive group is: 0.5889212827988338
+<pre>the test accuracy for for sensitive group is: 0.6472303206997084
+the test accuracy for for nonsensitive group is: 0.6501457725947521
 </pre>
 </div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_target</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sensitive_ytest</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">nonsensitive_ytest</span><span class="p">)</span>
-<span class="n">test_pred</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">test_yhat_sensitive</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">test_yhat_nonsensitive</span><span class="p">)</span>
-<span class="n">test_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span><span class="mf">.5</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">test_pred</span><span class="p">]</span>
-<span class="n">test_total_accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_target</span><span class="p">,</span><span class="n">test_pred</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the test accuracy for overall is: </span><span class="si">{</span><span class="n">test_total_accuracy</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>the test accuracy for overall is: 0.5860058309037901
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"Model"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"LFR"</span><span class="p">,</span><span class="s2">"LFR"</span><span class="p">,</span><span class="s2">"LFR"</span><span class="p">,</span><span class="s2">"LFR"</span><span class="p">,</span><span class="s2">"LFR"</span><span class="p">,</span><span class="s2">"LFR"</span><span class="p">],</span>
-    <span class="s2">"Group"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Sensitive"</span><span class="p">,</span> <span class="s2">"Nonsensitive"</span><span class="p">,</span> <span class="s2">"Total"</span><span class="p">,</span><span class="s2">"Sensitive"</span><span class="p">,</span> <span class="s2">"Nonsensitive"</span><span class="p">,</span> <span class="s2">"Total"</span><span class="p">],</span>
-    <span class="s2">"Dataset"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Test"</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">,</span> <span class="s2">"Test"</span><span class="p">,</span><span class="s2">"Val"</span><span class="p">,</span> <span class="s2">"Val"</span><span class="p">,</span> <span class="s2">"Val"</span><span class="p">],</span>
-    <span class="s2">"Accuracy (%)"</span><span class="p">:</span> <span class="p">[</span><span class="n">test_sensitive_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">test_nonsensitive_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">test_total_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span>
-                    <span class="n">val_sensitive_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">val_nonsensitive_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">val_total_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">df</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Model</th>
-      <th>Group</th>
-      <th>Dataset</th>
-      <th>Accuracy (%)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>LFR</td>
-      <td>Sensitive</td>
-      <td>Test</td>
-      <td>58.309038</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>LFR</td>
-      <td>Nonsensitive</td>
-      <td>Test</td>
-      <td>58.892128</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>LFR</td>
-      <td>Total</td>
-      <td>Test</td>
-      <td>58.600583</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>LFR</td>
-      <td>Sensitive</td>
-      <td>Val</td>
-      <td>55.393586</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>LFR</td>
-      <td>Nonsensitive</td>
-      <td>Val</td>
-      <td>56.559767</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>LFR</td>
-      <td>Total</td>
-      <td>Val</td>
-      <td>55.976676</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_calib_LFR</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">test_sensitive_accuracy</span> <span class="o">-</span> <span class="n">test_nonsensitive_accuracy</span><span class="p">)</span>
-<span class="n">val_calib_LFR</span><span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val_sensitive_accuracy</span> <span class="o">-</span> <span class="n">val_nonsensitive_accuracy</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the calibration of test set is: </span><span class="si">{</span><span class="n">test_calib_LFR</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'the calibration of validation set is: </span><span class="si">{</span><span class="n">val_calib_LFR</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s1">%'</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>the calibration of test set is: 0.5830903790087438%
-the calibration of validation set is: 1.1661807580174877%
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Baseline-model-(logistic-regression)">Baseline model (logistic regression)<a class="anchor-link" href="#Baseline-model-(logistic-regression)">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-
-<span class="n">train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sensitive_train</span><span class="p">,</span> <span class="n">nonsensitive_train</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">ytrain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sensitive_ytrain</span><span class="p">,</span> <span class="n">nonsensitive_ytrain</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
-
-<span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sensitive_val</span><span class="p">,</span> <span class="n">nonsensitive_val</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">yval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sensitive_yval</span><span class="p">,</span> <span class="n">nonsensitive_yval</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">val_y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-
-<span class="n">val_accuracy_total</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">val_y_hat</span><span class="p">,</span> <span class="n">yval</span><span class="p">)</span>
-
-<span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sensitive_test</span><span class="p">,</span> <span class="n">nonsensitive_test</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">ytest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sensitive_ytest</span><span class="p">,</span> <span class="n">nonsensitive_ytest</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">test_y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
-
-<span class="n">test_accuracy_total</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">test_y_hat</span><span class="p">,</span> <span class="n">ytest</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"Model"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"LR"</span><span class="p">,</span><span class="s2">"LR"</span><span class="p">],</span>
-    <span class="s2">"Group"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Total"</span><span class="p">,</span><span class="s2">"Total"</span><span class="p">],</span>
-    <span class="s2">"Dataset"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Test"</span><span class="p">,</span><span class="s2">"Val"</span><span class="p">],</span>
-    <span class="s2">"Accuracy (%)"</span><span class="p">:</span> <span class="p">[</span><span class="n">val_accuracy_total</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">test_accuracy_total</span><span class="o">*</span><span class="mi">100</span><span class="p">]}</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">df</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Model</th>
-      <th>Group</th>
-      <th>Dataset</th>
-      <th>Accuracy (%)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>LR</td>
-      <td>Total</td>
-      <td>Test</td>
-      <td>73.177843</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>LR</td>
-      <td>Total</td>
-      <td>Val</td>
-      <td>71.137026</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
 </div>
 
 </div>
